@@ -1,15 +1,12 @@
 <?php
-// (A) START SESSION
-session_start();
+session_start();  // Iniciar la sesion
 
-// (B) LOGOUT REQUEST
-if (isset($_POST["logout"])) { // Si se ha enviado el formulario de logout
-  session_destroy(); // esta funcion es para destruir la sesion y no dejar rastro de ella en el servidor y en el cliente (navegador).
-  unset($_SESSION); // esta funcion es para destruir la sesion y no dejar rastro de ella en el servidor y en el cliente (navegador).
+if (isset($_POST["logout"])) {  // Si se ha enviado el formulario de logout
+  session_destroy();  // Destruir la sesion
+  unset($_SESSION); // Eliminar la variable de sesion
 }
 
-// (C) REDIRECT TO LOGIN PAGE IF NOT SIGNED IN
-if (!isset($_SESSION["user"])) { // Si no hay usuario logueado
-  header("Location: 1-login.php"); // Redirigimos a la pagina de login
-  exit(); // Salimos del script
+if (!isset($_SESSION["user"])) {  // Si el usuario no esta logeado
+  header("Location: 1-login.php");  // Redirigir a la pagina de login
+  exit(); // Salir del script
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -11,11 +11,21 @@
 <body>
 
     <?php
-    require "2-check.php";
+    require "2-check.php";  // Se incluye el script de proteccion
 
-    if (isset($failed)) { ?>
-    <div id="login-bad">Invalid email or password.</div>
-    <?php } ?>
+    if (isset($failed)) {   // Si el login ha fallado
+    ?>
+        <div id="login-bad">Invalid email or password.</div>    <!-- Se muestra un mensaje de error -->
+    <?php
+    } elseif (isset($_SESSION["user"])) {   // Si el usuario esta logeado
+    ?>
+        <div id="login-ok"><?php echo $_SESSION["user"]; ?>.</div>  <!-- Se muestra un mensaje de bienvenida -->
+        <form id="logout-form" method="post" target="_self">
+            <input type="submit" name="logout" value="Log Out"> <!-- Se muestra un formulario de logout -->
+        </form>
+    <?php
+    }
+    ?>
 
     <form id="login-form" method="post" target="_self">
         <h1>PLEASE SIGN IN</h1>
